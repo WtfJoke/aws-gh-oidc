@@ -1,5 +1,5 @@
 resource "aws_iam_role" "github-actions-role" {
-  name               = "aws-gh-oidc"
+  name               = local.project_name
   description        = "Role to be assumed for a demonstration in https://github.com/WtfJoke/aws-gh-oidc"
   assume_role_policy = data.aws_iam_policy_document.github-actions-assume-role-trust-policy.json
 }
