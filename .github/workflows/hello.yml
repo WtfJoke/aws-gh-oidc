@@ -20,5 +20,7 @@ jobs:
       with:
         aws-region: eu-central-1
         role-to-assume: arn:aws:iam::589918074230:role/aws-gh-oidc
+    - name: Print AWS SSM Parameter
+      run: aws ssm get-parameter --name=hello_aws-gh-oidc
     - name: Print assumed role
       run: aws sts get-caller-identity
