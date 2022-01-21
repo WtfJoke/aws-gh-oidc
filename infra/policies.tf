@@ -18,10 +18,7 @@ data "aws_iam_policy_document" "github-actions-assume-role-trust-policy" {
     condition {
       test     = "StringEquals"
       variable = "token.actions.githubusercontent.com:sub"
-      values = [
-        "repo:WtfJoke/aws-gh-oidc:ref:refs/heads/main",
-        "repo:WtfJoke/aws-gh-oidc:ref:refs/heads/hello"
-      ]
+      values   = local.allowed_branches_to_assume_roles
     }
   }
 }
