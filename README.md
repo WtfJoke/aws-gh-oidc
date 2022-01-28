@@ -3,25 +3,13 @@
 Demonstrate a secure connection to aws from github without storing any credentials in the repository.  
 It allows accessing aws resources using the github action `aws-actions/configure-aws-credentials@v1` without storing any secrets (like `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` ) in the repository itself.
 
-## Infrastructure
-
 ### Requirements
 
-- [Terraform CLI](https://www.terraform.io/downloads) 1.1.4 or newer
 - [AWS CLI](https://aws.amazon.com/de/cli/)
+- For infrastructure either:
+  - [Terraform CLI](https://www.terraform.io/downloads) 1.1.4 or newer (if you want to create infrastructure using terraform)
+  - [AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/home.html) v2 or newer (if you want to create infrastructure using aws cdk)
 
-#### Initial setup
+### Infrastructure
 
-## Terraform
-
-1. Follow [README](infra/init/README.md) in folder `infra/terraform/init`
-2. In folder `infra/terraform`:
-   - `terraform init`
-   - `terraform apply`
-
-#### Destroy infrastructure
-
-## Terraform
-
-1. `terraform destroy` in folder `infra/terraform`
-2. `terraform destroy` in folder `infra/terraform/init`
+See [Infrastructure Readme](infra/README.md)
