@@ -5,12 +5,13 @@ import * as ssm from "aws-cdk-lib/aws-ssm";
 
 export interface GithubOIDCStackProps extends StackProps {
   projectName: string;
+  allowedBranchPatternToPush: string;
 }
 
 export class GithubOIDCStack extends Stack {
   constructor(scope: Construct, id: string, props: GithubOIDCStackProps) {
     super(scope, id, props);
-    const { projectName } = props;
+    const { projectName, allowedBranchPatternToPush } = props;
 
     const githubOIDCProvider = new iam.OpenIdConnectProvider(
       this,
@@ -21,10 +22,30 @@ export class GithubOIDCStack extends Stack {
       }
     );
 
+    const githubActionsRole = new iam.Role(this, "GithubActionsRole", {
+      // Trust policy
+      assumedBy: new iam.WebIdentityPrincipal(
+        githubOIDCProvider.openIdConnectProviderArn,
+        {
+          StringLike: {
+            // Only allow specified subjects/branches to assume this role
+            "token.actions.githubusercontent.com:sub":
+              allowedBranchPatternToPush,
+          },
+        }
+      ),
+      roleName: "aws-gh-oidc", // same as in .github/workflows/hello.yml
+      description: `Role to assume from github actions pipeline of ${projectName}`,
+    });
+
+    // Something to read for the pipeline :)
     const helloParameter = new ssm.StringParameter(this, "HelloParameter", {
       description: `Sample value for demo purpose of project ${projectName}`,
       parameterName: `hello_${projectName}`,
       stringValue: "Hi from aws :wave:",
     });
+
+    // Permission policy
+    helloParameter.grantRead(githubActionsRole);
   }
 }

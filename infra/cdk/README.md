@@ -1,13 +1,12 @@
-# Aws Github Oidc Connection
+# AWS Github OIDC Connection
 
-This is a cdk project to deploy Github OIDC Provider including policies in order to have access from Github Actions using the official `aws-actions/configure-aws-credentials@v1` action.
+This is a cdk project to deploy Github OIDC Provider in order to have access to aws resources from Github Actions using the official `aws-actions/configure-aws-credentials@v1` action. In this example an SSM Parameter with the name `hello_aws-gh-oidc` is created.
 
 ## Initialize project
 
 1. `npm install`
-2. Adjust aws account id in `cdk.ts`
-3. If you have never used cdk, please run `cdk bootstrap`
-4. Deploy it using `cdk deploy`
+2. If you have never used cdk, please run `cdk bootstrap`
+3. Deploy it using `cdk deploy`
 
 ## Useful commands
 
