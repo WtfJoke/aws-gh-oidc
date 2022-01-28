@@ -12,4 +12,4 @@ Following infrastructure is created:
 ## Details
 
 This repo provides infrastrucuture as code either by terraform or aws cdk.  
-Please follow the appropriate README either in [terraform](terraform/README.md) or [cdk](cdk/README.md) (if you dont know which to choose, choose terraform :)).
+Please follow the appropriate README either in [terraform](terraform/README.md) or [cdk](cdk/README.md) (if you dont know which to choose, cdk is probably easier to understand due to its biggest strenght/weakness over terraform, which are the sensible defaults :)).
