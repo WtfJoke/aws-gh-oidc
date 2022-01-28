@@ -12,12 +12,16 @@ It allows accessing aws resources using the github action `aws-actions/configure
 
 #### Initial setup
 
-1. Follow [README](infra/init/README.md) in folder `infra/init`
-2. In folder infra:
+## Terraform
+
+1. Follow [README](infra/init/README.md) in folder `infra/terraform/init`
+2. In folder `infra/terraform`:
    - `terraform init`
    - `terraform apply`
 
 #### Destroy infrastructure
 
-1. `terraform destroy` in folder `infra`
-2. `terraform destroy` in folder `infra/init`
+## Terraform
+
+1. `terraform destroy` in folder `infra/terraform`
+2. `terraform destroy` in folder `infra/terraform/init`
