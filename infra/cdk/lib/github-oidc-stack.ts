@@ -6,12 +6,13 @@ import * as ssm from "aws-cdk-lib/aws-ssm";
 export interface GithubOIDCStackProps extends StackProps {
   projectName: string;
   allowedBranchPatternToPush: string;
+  audience: string;
 }
 
 export class GithubOIDCStack extends Stack {
   constructor(scope: Construct, id: string, props: GithubOIDCStackProps) {
     super(scope, id, props);
-    const { projectName, allowedBranchPatternToPush } = props;
+    const { projectName, allowedBranchPatternToPush, audience } = props;
 
     const githubOIDCProvider = new iam.OpenIdConnectProvider(
       this,
@@ -31,6 +32,9 @@ export class GithubOIDCStack extends Stack {
             // Only allow specified subjects/branches to assume this role
             "token.actions.githubusercontent.com:sub":
               allowedBranchPatternToPush,
+          },
+          StringEquals: {
+            "token.actions.githubusercontent.com:aud": audience,
           },
         }
       ),

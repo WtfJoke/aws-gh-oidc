@@ -20,6 +20,12 @@ data "aws_iam_policy_document" "github-actions-assume-role-trust-policy" {
       variable = "token.actions.githubusercontent.com:sub"
       values   = local.allowed_branches_to_assume_roles
     }
+
+    condition {
+      test     = "StringEquals"
+      variable = "token.actions.githubusercontent.com:aud"
+      values   = [local.audience]
+    }
   }
 }
 
