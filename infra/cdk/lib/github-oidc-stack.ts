@@ -5,7 +5,7 @@ import * as ssm from "aws-cdk-lib/aws-ssm";
 
 export interface GithubOIDCStackProps extends StackProps {
   projectName: string;
-  allowedBranchPatternToPush: string;
+  allowedBranchPatternToPush: string[];
   audience: string;
 }
 
@@ -23,30 +23,29 @@ export class GithubOIDCStack extends Stack {
       }
     );
 
-    const githubActionsRole = new iam.Role(this, "GithubActionsRole", {
-      // Trust policy
-      assumedBy: new iam.WebIdentityPrincipal(
-        githubOIDCProvider.openIdConnectProviderArn,
-        {
-          StringLike: {
-            // Only allow specified subjects/branches to assume this role
-            "token.actions.githubusercontent.com:sub":
-              allowedBranchPatternToPush,
-          },
-          StringEquals: {
-            "token.actions.githubusercontent.com:aud": audience,
-          },
-        }
-      ),
-      roleName: "aws-gh-oidc", // same as in .github/workflows/hello.yml
-      description: `Role to assume from github actions pipeline of ${projectName}`,
-    });
-
     // Something to read for the pipeline :)
     const helloParameter = new ssm.StringParameter(this, "HelloParameter", {
       description: `Sample value for demo purpose of project ${projectName}`,
       parameterName: `hello_${projectName}`,
       stringValue: "Hi from aws :wave:",
+    });
+
+    const githubActionsRole = new iam.Role(this, "GithubActionsRole", {
+      // Trust policy
+      assumedBy: new iam.WebIdentityPrincipal(
+        githubOIDCProvider.openIdConnectProviderArn,
+        {
+          StringEquals: {
+            // Only allow tokens issued by aws-actions/configure-aws-credentials
+            "token.actions.githubusercontent.com:aud": audience,
+            // Only allow specified branches to assume this role
+            "token.actions.githubusercontent.com:sub":
+              allowedBranchPatternToPush,
+          },
+        }
+      ),
+      roleName: "aws-gh-oidc", // same as in .github/workflows/hello.yml
+      description: `Role to assume from github actions pipeline of ${projectName}`,
     });
 
     // Permission policy

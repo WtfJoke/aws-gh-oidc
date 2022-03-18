@@ -11,7 +11,7 @@ const audience = "sts.amazonaws.com";
 new GithubOIDCStack(app, "GithubOIDCStack", {
   projectName,
   // What matches this rule can assume the role - Be careful and make sure you include your repositories name
-  allowedBranchPatternToPush: "repo:WtfJoke/aws-gh-oidc:ref:refs/heads/main",
+  allowedBranchPatternToPush: ["repo:WtfJoke/aws-gh-oidc:ref:refs/heads/main"],
   audience,
   env: {
     region: "eu-central-1",
