@@ -3,8 +3,8 @@
 Demonstrate a secure connection to aws from github without storing any credentials in the repository.  
 It allows accessing aws resources using the github action `aws-actions/configure-aws-credentials@v1` without storing any secrets (like `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` ) in the repository itself.
 
-![138510587-33253c06-a2c4-4276-ac6b-3214ca94c9e6](https://user-images.githubusercontent.com/7139697/151580363-b9b6402a-9865-46c5-b55a-e0f6c27b4f7b.png)
-*Image-Source: https://github.blog/changelog/2021-10-27-github-actions-secure-cloud-deployments-with-openid-connect/*
+![GithubAWSOIDC](https://user-images.githubusercontent.com/7139697/169553855-2e76a7be-f0c4-44c1-9630-227574241463.png)
+
 
 ### Requirements
 
