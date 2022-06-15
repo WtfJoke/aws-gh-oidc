@@ -1,7 +1,7 @@
 # aws-gh-oidc
 
 Demonstrate a secure connection to aws from github without storing any credentials in the repository.  
-It allows accessing aws resources using the github action `aws-actions/configure-aws-credentials@v1` without storing any secrets (like `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` ) in the repository itself.
+It allows accessing aws resources using the github action `aws-actions/configure-aws-credentials@v1` without storing any secrets (like `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` ) in the repository itself. Read more in the [Blogpost](https://blog.codecentric.de/en/2022/05/secretless-connections-from-github-actions-to-aws-using-oidc/) here
 
 ![GithubAWSOIDC](https://user-images.githubusercontent.com/7139697/169553855-2e76a7be-f0c4-44c1-9630-227574241463.png)
 
